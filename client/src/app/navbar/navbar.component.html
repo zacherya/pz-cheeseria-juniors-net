@@ -1,0 +1,174 @@
+<!--End homepage-->
+<nav
+  class="navbar navbar-expand-lg navbar-light bg-light"
+  data-toggle="collapse"
+  data-target=".navbar-collapse.show"
+>
+  <a class="navbar-brand" routerLink="/"
+    ><img src="../../assets/img/{{ logo }}" alt=""
+  /></a>
+  <button
+    class="navbar-toggler"
+    type="button"
+    data-toggle="collapse"
+    data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent"
+    aria-expanded="false"
+    aria-label="Toggle navigation"
+  >
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a
+          href="#"
+          class="nav-link"
+          data-toggle="collapse"
+          data-target=".navbar-collapse.show"
+          >Recent Purchases</a
+        >
+      </li>
+
+      <div class="dropdown-divider d-block d-lg-none"></div>
+
+      <div class="d-block">
+        <button class="btn btn-dark d-lg-none w-50 rounded-0">
+          <i
+            class="fa fa-shopping-cart"
+            routerLink="/cart"
+            data-toggle="collapse"
+            data-target=".navbar-collapse.show"
+          ></i
+          >View Cart
+        </button>
+      </div>
+    </ul>
+    <ul class="navbar-nav ml-auto icons">
+      <li class="space"></li>
+
+      <li class="dropdown d-none d-lg-block">
+        <a
+          class="nav-link dropdown-toggle"
+          href="#"
+          id="navbarDropdown"
+          role="button"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="true"
+          [attr.data-cy]="'view-cart-btn'"
+        >
+          <i class="fa fa-shopping-cart" aria-hidden="true">
+            {{ cartSize }}
+            <br />
+            <span>View Cart</span>
+          </i>
+        </a>
+
+        <div
+          class="dropdown-menu"
+          aria-labelledby="navbarDropdown"
+          (click)="$event.stopPropagation()"
+        >
+          <h2 class="ml-5 mt-4">Your Shopping Cart</h2>
+          <div
+            class="
+              no-item
+              w-100
+              d-flex
+              justify-content-center
+              align-items-center
+              flex-column
+            "
+            *ngIf="cartSize === 0"
+          >
+            <span
+              ><img
+                src="../../assets/img/nothing_to_see.png"
+                alt=""
+                class="nothing-img"
+            /></span>
+            <span class="nothing-top-text mt-2 font-weight-bold"
+              >Nothing to see here!</span
+            >
+            <span class="nothing-small-text"
+              >Add items to your cart and then find them here.</span
+            >
+          </div>
+
+          <div class="cart-list" *ngIf="cartSize !== 0">
+            <div
+              class="row border-bottom"
+              *ngFor="let purchaseItem of cartData | keyvalue"
+            >
+              <div
+                class="
+                  col
+                  d-flex
+                  justify-content-between
+                  product-widget
+                  w-100
+                  py-2
+                "
+              >
+                <div class="d-flex flex-column">
+                  <button
+                    type="button"
+                    class="
+                      mx-3
+                      mb-1
+                      btn-danger
+                      font-weight-bold
+                      px-2
+                      rounded-top
+                    "
+                    (click)="changeItemAmount(purchaseItem.key, 1)"
+                  >
+                    +
+                  </button>
+                  <button
+                    class="
+                      mx-3
+                      mt-1
+                      btn-danger
+                      font-weight-bold
+                      px-2
+                      rounded-bottom
+                    "
+                    (click)="changeItemAmount(purchaseItem.key, -1)"
+                  >
+                    -
+                  </button>
+                </div>
+                <div class="product-img mr-auto ml-1">
+                  <img
+                    src="{{ getDetails(purchaseItem.key).image }}"
+                    alt=""
+                    width="80px"
+                    height="100%"
+                  />
+                </div>
+                <div
+                  class="product-body d-flex flex-column align-items-end mr-2"
+                >
+                  <h3 class="product-name">
+                    {{ getDetails(purchaseItem.key).title }}
+                  </h3>
+                  <h4 class="product-price">
+                    <span class="qty">{{ purchaseItem.value }} x </span
+                    >{{ getDetails(purchaseItem.key).price | currency: "USD" }}
+                  </h4>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="cart-summary" *ngIf="cartSize !== 0">
+            <small>{{ cartSize !== 0 ? cartSize : 0 }} Selected item(s)</small>
+            <h5>TOTAL : {{ calculateTotal() | currency: "USD" }}</h5>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</nav>
+<!--End homepage-->

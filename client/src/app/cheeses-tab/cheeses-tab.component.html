@@ -1,0 +1,65 @@
+<div class="container-fluid services">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="row featured-section">
+        <div
+          class="col-sm-12 menu-list d-flex flex-column justify-content-center"
+        >
+          <div class="res-headings">
+            <h1>Cheeses</h1>
+          </div>
+          <div class="row">
+            <!--Ngx-skeleton-->
+            <div class="item col-sm-12" *ngIf="!contentLoadedProds">
+              <ngx-skeleton-loader
+                count="4"
+                animation="pulse"
+                appearance="circle"
+                [theme]="{
+                  'border-radius': '5px',
+                  height: '250px',
+                  width: '310px',
+                  border: '1px solid white'
+                }"
+              ></ngx-skeleton-loader>
+
+              <ngx-skeleton-loader
+                animation="pulse"
+                count="5"
+                [theme]="{
+                  'border-radius': '0',
+                  height: '10px',
+                  width: '100%'
+                }"
+              ></ngx-skeleton-loader>
+            </div>
+            <!--Ngx-skeleton END-->
+          </div>
+
+          <div
+            class="d-flex row justify-content-lg-center"
+            *ngIf="contentLoadedProds"
+          >
+            <div
+              class="restaurant col-xs-12 col-sm-6 col-lg-4 col-xl-3"
+              *ngFor="let cheese of products"
+            >
+              <img src="{{ cheese.image }}" alt="" />
+              <h3>{{ cheese.title }}</h3>
+              <p>
+                <strong>${{ cheese.price }}</strong>
+              </p>
+              <button
+                class="btn"
+                [attr.data-cy]="'add-to-cart-' + cheese.id"
+                (click)="addToCart(cheese.id)"
+              >
+                Add to cart
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
