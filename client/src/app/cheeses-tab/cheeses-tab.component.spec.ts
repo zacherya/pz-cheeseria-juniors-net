@@ -1,3 +1,4 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CheesesTabComponent } from './cheeses-tab.component';
@@ -8,9 +9,9 @@ describe('CheesesTabComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CheesesTabComponent ]
-    })
-    .compileComponents();
+      declarations: [CheesesTabComponent],
+      imports: [HttpClientTestingModule],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
