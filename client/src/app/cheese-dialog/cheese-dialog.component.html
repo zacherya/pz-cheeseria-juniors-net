@@ -1,0 +1,31 @@
+
+<div mat-dialog-content>
+  <div class="row dialog-header">
+    <div class="d-flex col-sm-12">
+      <button mat-icon-button mat-dialog-close aria-label="Close cheese dialog">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+  </div>
+  <div class="row dialog-content">
+    <div class="col-sm-6">
+      <img
+        src="{{data.cheese.image}}"
+        alt="Image of {{data.cheese.title}}"
+        class="img-fluid"
+      />
+    </div>
+    <div class="col-sm-6">
+      <h1 mat-dialog-title>{{data.cheese.title}}</h1>
+      <p class="mat-dialog-subtitle">
+        <strong>${{data.cheese.price}}</strong>
+      </p>
+      <hr>
+      <p>{{data.cheese.description}}</p>
+      
+    </div>
+  </div>
+</div>
+<div mat-dialog-actions class="dialog-footer">
+  <button cdkFocusInitial class="btn" [attr.data-cy]="'add-to-cart-' + data.cheese.id" (click)="addToCart(data.cheese.id)">Add To Cart</button>
+</div>

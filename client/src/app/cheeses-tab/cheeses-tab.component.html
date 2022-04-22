@@ -44,11 +44,14 @@
               class="restaurant col-xs-12 col-sm-6 col-lg-4 col-xl-3"
               *ngFor="let cheese of products"
             >
+            <div 
+            (click)="openCheeseModal(cheese)">
               <img src="{{ cheese.image }}" alt="" />
               <h3>{{ cheese.title }}</h3>
               <p>
                 <strong>${{ cheese.price }}</strong>
               </p>
+              </div>
               <button
                 class="btn"
                 [attr.data-cy]="'add-to-cart-' + cheese.id"

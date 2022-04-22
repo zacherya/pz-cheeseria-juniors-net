@@ -10,6 +10,8 @@ import { ToastrModule } from 'ngx-toastr';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { AppRoutingModule } from './app-routing.module';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { NgxPaginationModule } from 'ngx-pagination';
 
@@ -18,9 +20,10 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { NavbarComponent } from './navbar/navbar.component';
 import { CheesesTabComponent } from './cheeses-tab/cheeses-tab.component';
+import { CheeseDialogComponent } from './cheese-dialog/cheese-dialog.component';
 
 @NgModule({
-  declarations: [AppComponent, NavbarComponent, CheesesTabComponent],
+  declarations: [AppComponent, NavbarComponent, CheesesTabComponent,CheeseDialogComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -35,8 +38,10 @@ import { CheesesTabComponent } from './cheeses-tab/cheeses-tab.component';
     NgxSpinnerModule,
     NoopAnimationsModule,
     MatDialogModule,
+    MatButtonModule,
+    MatIconModule,
     NgxSkeletonLoaderModule.forRoot(),
-    NgxPaginationModule,
+    NgxPaginationModule
   ],
   bootstrap: [AppComponent],
 })
