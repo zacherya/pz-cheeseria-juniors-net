@@ -11,17 +11,11 @@ namespace Pz.Cheeseria.Api.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        public bool Paid { get; set; }
 
         public DateTime PurchasedOn { get; set; } = DateTime.Now;
 
         [ForeignKey("PurchaseId")]
-        public ICollection<PurchaseItem> Items { get; set; }
+        public ICollection<PurchaseItem> Items { get; set; } = new List<PurchaseItem>();
 
-        public decimal GetPurchaseTotal()
-        {
-            decimal total = Items.Sum(item => item.Cheese.Price * item.Quantity);
-            return total;
-        }
     }
 }

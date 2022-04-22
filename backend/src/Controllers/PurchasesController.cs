@@ -49,16 +49,26 @@ namespace Pz.Cheeseria.Api.Controllers
 
         [HttpPost]
         [ProducesResponseType(typeof(Purchase), 200)]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Index([Bind("Id,Paid,PurchasedOn")] Purchase purchase)
+        public async Task<IActionResult> Index([Bind("data")] List<NewPurchase> purchases)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(purchase);
+                var purchase = new Purchase();
+                foreach (NewPurchase phse in purchases)
+                {
+                    PurchaseItem item = new PurchaseItem
+                    {
+                        Quantity = phse.Quantity,
+                        CheeseId = phse.CheeseId
+                    };
+                    purchase.Items.Add(item);
+                }
+
+                _context.Purchases.Add(purchase);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return Ok(purchase);
+            return BadRequest();
         }
     }
 }

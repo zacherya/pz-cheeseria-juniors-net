@@ -9,12 +9,10 @@ namespace Pz.Cheeseria.Api.Data
         {
             new Purchase
             {
-                Paid = true,
                 PurchasedOn = DateTime.Now.AddDays(-6)
             },
             new Purchase
             {
-                Paid = true,
                 PurchasedOn = DateTime.Now.AddDays(-14)
             }
         };

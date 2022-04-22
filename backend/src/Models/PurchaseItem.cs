@@ -13,9 +13,7 @@ namespace Pz.Cheeseria.Api.Models
 
         public int PurchaseId { get; set; }
 
-        [ForeignKey(nameof(Cheese))]
         public int CheeseId { get; set; }
-        public Cheese Cheese { get; set; }
 
         public int Quantity { get; set; }
     }
