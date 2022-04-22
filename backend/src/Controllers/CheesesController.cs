@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Pz.Cheeseria.Api.Data;
 using Pz.Cheeseria.Api.Models;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Pz.Cheeseria.Api.Controllers
 {
@@ -8,11 +10,19 @@ namespace Pz.Cheeseria.Api.Controllers
     [ApiController]
     public class CheesesController : ControllerBase
     {
-        [HttpGet]
-        [ProducesResponseType(typeof(Cheese[]), 200)]
-        public IActionResult GetCheeses()
+        private readonly PzCheeseriaContext _context;
+
+        public CheesesController(PzCheeseriaContext context)
         {
-            return Ok(CheesesRepository.Cheeses);
+            _context = context;
         }
+
+        [HttpGet]
+        [ProducesResponseType(typeof(List<Cheese>), 200)]
+        public async Task<IActionResult> GetCheeses()
+        {
+            return Ok(await _context.GetCheeses());
+        }
+
     }
 }

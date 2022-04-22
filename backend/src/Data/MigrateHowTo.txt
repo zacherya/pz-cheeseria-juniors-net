@@ -1,0 +1,2 @@
+﻿Add to read me when finished:
+EntityFrameworkCore\Add-Migration PzcMigration
