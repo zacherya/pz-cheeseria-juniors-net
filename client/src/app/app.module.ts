@@ -12,6 +12,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MatExpansionModule } from '@angular/material/expansion';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { NgxPaginationModule } from 'ngx-pagination';
 
@@ -21,9 +22,10 @@ import { environment } from '../environments/environment';
 import { NavbarComponent } from './navbar/navbar.component';
 import { CheesesTabComponent } from './cheeses-tab/cheeses-tab.component';
 import { CheeseDialogComponent } from './cheese-dialog/cheese-dialog.component';
+import { PurchasesDialogComponent } from './purchases-dialog/purchases-dialog.component';
 
 @NgModule({
-  declarations: [AppComponent, NavbarComponent, CheesesTabComponent,CheeseDialogComponent],
+  declarations: [AppComponent, NavbarComponent, CheesesTabComponent,CheeseDialogComponent, PurchasesDialogComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -40,6 +42,7 @@ import { CheeseDialogComponent } from './cheese-dialog/cheese-dialog.component';
     MatDialogModule,
     MatButtonModule,
     MatIconModule,
+    MatExpansionModule,
     NgxSkeletonLoaderModule.forRoot(),
     NgxPaginationModule
   ],

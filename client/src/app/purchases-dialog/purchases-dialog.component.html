@@ -1,0 +1,33 @@
+
+<div mat-dialog-content>
+  <div class="row dialog-header">
+    <div class="d-flex col-sm-12">
+      <h1 mat-dialog-title>Recent purchase history</h1>
+      <button mat-icon-button mat-dialog-close aria-label="Close cheese dialog">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+  </div>
+  <div class="row dialog-content">
+    <div class="col-sm-12 p-2">
+      <mat-accordion class="example-headers-align">
+
+        <mat-expansion-panel *ngFor="let purchase of purchases" [expanded]="step === purchase.id" (opened)="setStep(0)">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              #{{purchase.id}}
+            </mat-panel-title>
+            <mat-panel-description>
+              {{purchase.items.length}} items
+            </mat-panel-description>
+            <mat-panel-description>
+              {{purchase.purchasedOn}}
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <!-- body here -->
+
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+  </div>
+</div>

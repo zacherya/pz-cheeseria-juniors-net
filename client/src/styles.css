@@ -170,6 +170,9 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; padding-bot
     cursor: default;
 }
 
+.mat-dialog-container {
+  background: #eee;
+  }
 .mat-dialog-container .dialog-header {
   margin-bottom: 12px;
 }

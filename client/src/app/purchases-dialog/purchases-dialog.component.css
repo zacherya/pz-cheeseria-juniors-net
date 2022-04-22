@@ -1,0 +1,21 @@
+/*
+    Default style overrides for cheese dialog
+*/
+
+
+.dialog-header > div {
+    justify-content: space-between;
+}
+
+.mat-dialog-title {
+    font-weight: bolder;
+    font-size: 1.5rem;
+    margin-bottom: 0;
+}
+
+.mat-dialog-subtitle {
+    font-weight: bold;
+    font-size: 1rem;
+    color: rgba(0,0,0,0.5);
+}
+
