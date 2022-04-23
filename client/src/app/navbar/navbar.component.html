@@ -20,7 +20,7 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item" (click)="openRecentPurchases()">
+      <li *ngIf="purchasesLoaded && productsLoaded" class="nav-item" (click)="openRecentPurchases()">
         <a
           href="#"
           class="nav-link"

@@ -10,22 +10,48 @@
   </div>
   <div class="row dialog-content">
     <div class="col-sm-12 p-2">
-      <mat-accordion class="example-headers-align">
+      <div *ngIf="purchases.length === 0">
+        <p>No purchases have been made yet.</p>
+      </div>
+      <mat-accordion *ngIf="purchases.length > 0" class="example-headers-align">
 
         <mat-expansion-panel *ngFor="let purchase of purchases" [expanded]="step === purchase.id" (opened)="setStep(0)">
           <mat-expansion-panel-header>
             <mat-panel-title>
-              #{{purchase.id}}
+              Order #{{purchase.id}}
+              
             </mat-panel-title>
+            <mat-panel-description>
+              {{convertPurchaseDate(purchase.purchasedOn)}}
+            </mat-panel-description>
             <mat-panel-description>
               {{purchase.items.length}} items
             </mat-panel-description>
-            <mat-panel-description>
-              {{purchase.purchasedOn}}
-            </mat-panel-description>
+            
           </mat-expansion-panel-header>
-          <!-- body here -->
-
+          
+          <table class="purchases-table">
+            <tr>
+              <th></th>
+              <th></th>
+              <th>Name</th>
+              <th>Category</th>
+              <th class="right-align">Price</th>
+              <th class="right-align">Cost</th>
+              </tr>
+            <tr *ngFor="let item of purchase.items">
+              <td>{{item.quantity}}x</td>
+              <td><img width="75" height="50" src="{{getProductFromId(item.cheeseId).image}}"/></td>
+              <td>{{getProductFromId(item.cheeseId).title}}</td>
+              
+              <td>{{getProductFromId(item.cheeseId).category}} </td>
+              <td class="right-align">${{getProductFromId(item.cheeseId).price.toFixed(2)}}</td>
+              <td class="right-align">${{(item.quantity*getProductFromId(item.cheeseId).price).toFixed(2)}}</td>
+            </tr>
+            <tr class="total-column">
+              <td colspan="6">${{getPurchaseTotal(purchase).toFixed(2)}}</td>
+            </tr>
+            </table>
         </mat-expansion-panel>
       </mat-accordion>
     </div>

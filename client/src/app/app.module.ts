@@ -13,6 +13,8 @@ import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { NgxPaginationModule } from 'ngx-pagination';
 
@@ -43,6 +45,8 @@ import { PurchasesDialogComponent } from './purchases-dialog/purchases-dialog.co
     MatButtonModule,
     MatIconModule,
     MatExpansionModule,
+    MatTableModule,
+    MatPaginatorModule,
     NgxSkeletonLoaderModule.forRoot(),
     NgxPaginationModule
   ],

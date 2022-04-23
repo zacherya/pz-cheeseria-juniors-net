@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { CartService } from '../_services/cart.service';
+import { PurchasesService } from '../_services/purchases.service';
 import { CartModelPublic } from '../_models/cart';
 import { Cheese } from '../_models/cheese';
 import { PurchasesDialogComponent } from '../purchases-dialog/purchases-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+import { Purchase } from '../_models/purchase';
 
 @Component({
   selector: 'app-navbar',
@@ -16,19 +18,25 @@ export class NavbarComponent implements OnInit {
   cartTotal: number;
   _message: string;
   products: Cheese[];
+  purchases: Purchase[];
 
   store: any = [];
   logo: any;
 
   purchasesDialogOpen: boolean = false;
 
+  productsLoaded: boolean = false;
+  purchasesLoaded: boolean = false;
+
   constructor(private cartService: CartService,
+    private purchasesService: PurchasesService,
     public purchaseDialog: MatDialog) {}
 
   ngOnInit() {
     // set the products locally
     this.cartService.productData$.subscribe((data) => {
       this.products = data;
+      this.productsLoaded = true;
     });
 
     this.cartService.cartDataObs$.subscribe((data) => {
@@ -38,6 +46,11 @@ export class NavbarComponent implements OnInit {
         0
       );
     });
+
+    this.purchasesService.getPurchases().subscribe((prchs) => {
+      this.purchases = prchs;
+      this.purchasesLoaded = true;
+    });
   }
 
   //Open the recently purchased dialog and don't reopen if already open
@@ -45,7 +58,7 @@ export class NavbarComponent implements OnInit {
     if(this.purchasesDialogOpen) return;
     const dialogRef = this.purchaseDialog.open(PurchasesDialogComponent, {
       width: '720px',
-      data: this.products,
+      data: {products: this.products, purchases: this.purchases},
     });
     this.purchasesDialogOpen = true;
 
