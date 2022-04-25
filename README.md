@@ -22,6 +22,9 @@ The below instructions should be followed as per normal with the addition of set
 /db="Server=svfs01;Database=PzCheeseria;Uid=username;Pwd=pwd;"
 ```
 
+#### Testing
+Three additional test cases have be implemented into Cypress and one has been modified as per the project instructions. The additonal tests will run after the inital scoped test.
+
 ## Overview
 
 Help us complete our Cheese shopping cart.<br />
