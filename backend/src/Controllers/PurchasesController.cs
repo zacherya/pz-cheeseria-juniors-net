@@ -50,7 +50,7 @@ namespace Pz.Cheeseria.Api.Controllers
         [HttpPost]
         [ProducesResponseType(typeof(Purchase), 200)]
         [Route("new")]
-        public async Task<IActionResult> New([Bind("data")] List<NewPurchase> purchases)
+        public async Task<IActionResult> New([Bind("data")] NewPurchase[] purchases)
         {
             if (ModelState.IsValid)
             {
@@ -67,7 +67,7 @@ namespace Pz.Cheeseria.Api.Controllers
 
                 _context.Purchases.Add(purchase);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return Ok(purchase);
             }
             return BadRequest();
         }

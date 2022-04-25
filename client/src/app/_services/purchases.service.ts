@@ -18,8 +18,6 @@ export class PurchasesService {
   }
 
   completePurchase(items: any): Observable<any> {
-    return this.http.post(this.server_url + '/purchases/new', {
-      data: items,
-    });
+    return this.http.post(this.server_url + '/purchases/new', items);
   }
 }

@@ -76,7 +76,10 @@ export class CartService {
     this.cartDataObs$.next(this.cartDataClient);
   }
 
-  PurchaseCart() {
+  // Map cart items to backend new purchase item model
+  // and call the purchase service to make a new purchase request with the data
+  // return success flag and passes new purchaseId to the callback function
+  PurchaseCart(callback) {
     const cart = this.cartDataClient;
     const cartItems = Object.entries(cart).map(([id, quantity]) => {
       return {
@@ -88,9 +91,12 @@ export class CartService {
       this.toastr.success(`Purchase of ${purchase.items.length} items completed!`);
       this.cartDataClient = {};
       this.cartDataObs$.next(this.cartDataClient);
+      callback(true, purchase.id);
     },(err: HttpErrorResponse) => {
-      console.log(err.error.message);
+      console.log(err.error.title);
       this.toastr.error(`The purchase has failed, check your internet connection and try again.`);
+      callback(false, null);
     });
+    callback(false, null);
   }
 }

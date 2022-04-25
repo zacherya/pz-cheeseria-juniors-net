@@ -15,7 +15,7 @@
       </div>
       <mat-accordion *ngIf="purchases.length > 0" class="example-headers-align">
 
-        <mat-expansion-panel *ngFor="let purchase of purchases" [expanded]="step === purchase.id" (opened)="setStep(0)">
+        <mat-expansion-panel *ngFor="let purchase of purchases" [expanded]="accordionStep === purchase.id" (opened)="setStep(purchase.id)">
           <mat-expansion-panel-header>
             <mat-panel-title>
               Order #{{purchase.id}}
