@@ -64,8 +64,9 @@ export class NavbarComponent implements OnInit {
     this.purchasesDialogOpen = true;
 
     dialogRef.afterClosed().subscribe((data) => {
-      this.addRecentPurchasesToCart(data);
-      console.log('The dialog was closed');
+      if(data) {
+        this.addRecentPurchasesToCart(data);
+      }
       this.purchasesDialogOpen = false;
     });
   }
