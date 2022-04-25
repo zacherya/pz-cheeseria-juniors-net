@@ -55,6 +55,10 @@ import { ActionConfirmationDialog } from '../action-confirmation-dialog/action-c
       return this.products.find((product) => product.id === id);
     }
 
+    getPurchaseIndex(purchase: Purchase): number {
+      return this.products.findIndex((p) => p.id === purchase.id);
+    }
+
     getItemTotal(items: PurchaseItem[]): number {
       return items.reduce((total, item) => total + item.quantity, 0);
     }

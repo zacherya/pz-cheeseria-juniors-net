@@ -2,7 +2,7 @@
 <div mat-dialog-content>
   <div class="row dialog-header">
     <div class="d-flex col-sm-12">
-      <button mat-icon-button mat-dialog-close aria-label="Close cheese dialog">
+      <button mat-icon-button mat-dialog-close [attr.data-cy]="'close-dialog'" aria-label="Close cheese dialog">
         <mat-icon>close</mat-icon>
       </button>
     </div>
@@ -27,5 +27,5 @@
   </div>
 </div>
 <div mat-dialog-actions class="dialog-footer">
-  <button cdkFocusInitial class="btn" [attr.data-cy]="'add-to-cart-' + data.cheese.id" (click)="addToCart(data.cheese.id)">Add to cart</button>
+  <button cdkFocusInitial class="btn" [attr.data-cy]="'quick-add-to-cart-' + data.cheese.id" (click)="addToCart(data.cheese.id)">Add to cart</button>
 </div>

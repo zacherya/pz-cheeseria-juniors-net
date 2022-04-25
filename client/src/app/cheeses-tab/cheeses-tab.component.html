@@ -45,6 +45,7 @@
               *ngFor="let cheese of products"
             >
             <div 
+            [attr.data-cy]="'cheese-' + cheese.id"
             (click)="openCheeseModal(cheese)">
               <img src="{{ cheese.image }}" alt="" />
               <h3>{{ cheese.title }}</h3>
