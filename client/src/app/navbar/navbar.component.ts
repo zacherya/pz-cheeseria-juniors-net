@@ -7,6 +7,7 @@ import { PurchasesDialogComponent } from '../purchases-dialog/purchases-dialog.c
 import { MatDialog } from '@angular/material/dialog';
 import { Purchase } from '../_models/purchase';
 import { PurchaseItem } from '../_models/purchaseItem';
+import { ActionConfirmationDialog } from '../action-confirmation-dialog/action-confirmation-dialog.component';
 
 @Component({
   selector: 'app-navbar',
@@ -25,13 +26,15 @@ export class NavbarComponent implements OnInit {
   logo: any;
 
   purchasesDialogOpen: boolean = false;
+  cartDropdownOpen: boolean = false;
 
   productsLoaded: boolean = false;
   purchasesLoaded: boolean = false;
 
   constructor(private cartService: CartService,
     private purchasesService: PurchasesService,
-    public purchaseDialog: MatDialog) {}
+    public purchaseDialog: MatDialog,
+    private actionDialog: MatDialog) {}
 
   ngOnInit() {
     // set the products locally
@@ -48,18 +51,49 @@ export class NavbarComponent implements OnInit {
       );
     });
 
+    this.getPurchases();
+  }
+
+  getPurchases(callback?) {
     this.purchasesService.getPurchases().subscribe((prchs) => {
       this.purchases = prchs;
       this.purchasesLoaded = true;
+      if(callback !== undefined) {
+        callback();
+      }
     });
   }
 
+  completePurchase() {
+    const dialogRef = this.actionDialog.open(ActionConfirmationDialog, {
+      width: '720px',
+      data: {
+        title: 'complete your purchase',
+        callback: (() => {
+          this.cartService.PurchaseCart((success,purchaseId) => {
+            if(success) {
+              this.getPurchases((() => {
+                this.openRecentPurchases(purchaseId);
+                document.getElementById('navbarDropdown').classList.remove("show");
+              }).bind(this));
+              
+            }
+          });
+        }).bind(this)
+      },
+    });
+    
+  }
+
   //Open the recently purchased dialog and don't reopen if already open
-  openRecentPurchases() {
-    if(this.purchasesDialogOpen) return;
+  openRecentPurchases(purchaseId?: number) {
+    if(this.purchasesDialogOpen) {
+      this.purchaseDialog.closeAll();
+      return;
+    };
     const dialogRef = this.purchaseDialog.open(PurchasesDialogComponent, {
       width: '720px',
-      data: {products: this.products, purchases: this.purchases},
+      data: {products: this.products, purchases: this.purchases, purchaseId: purchaseId},
     });
     this.purchasesDialogOpen = true;
 
@@ -71,6 +105,8 @@ export class NavbarComponent implements OnInit {
     });
   }
 
+  // Add a list of purchase items to the cart
+  // Will not remove existing items but rather add to them
   addRecentPurchasesToCart(items: PurchaseItem[]) {
     items.forEach((item) => {
       this.cartService.AddPurchaseItemsToCart(item.cheeseId, item.quantity);
@@ -97,5 +133,9 @@ export class NavbarComponent implements OnInit {
       (total, [key, value]) => total + this.getDetails(key).price * value,
       0
     );
+  }
+
+  toggleCartDropdown() {
+    this.cartDropdownOpen = !this.cartDropdownOpen;
   }
 }

@@ -1,6 +1,9 @@
 /*
     Default style overrides for cheese dialog
 */
+.cdk-overlay-container {
+    z-index: 2000;
+}
 .mat-dialog-content .dialog-header > div {
     justify-content: flex-start;
 }

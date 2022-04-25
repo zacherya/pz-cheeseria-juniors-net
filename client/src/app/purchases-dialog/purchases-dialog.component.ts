@@ -31,6 +31,7 @@ import { ActionConfirmationDialog } from '../action-confirmation-dialog/action-c
         return b.id - a.id;
       });
       this.products = this.data.products;
+      this.setStep(this.data.purchaseId ? this.purchases.find((purchase) => purchase.id === this.data.purchaseId).id : 0)
     }
   
     //Custom close override method for cleanup
@@ -93,13 +94,5 @@ import { ActionConfirmationDialog } from '../action-confirmation-dialog/action-c
 
     setStep(index: number) {
       this.accordionStep = index;
-    }
-  
-    nextStep() {
-      this.accordionStep++;
-    }
-  
-    prevStep() {
-      this.accordionStep--;
     }
   }
