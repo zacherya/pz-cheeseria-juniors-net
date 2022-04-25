@@ -46,6 +46,11 @@
   color: #202020;
 }
 
+.dropdown > .nav-link.dropdown-toggle {
+  padding-top: 1rem;
+  padding-bottom: 0.25rem;
+}
+
 .fa {
   color: #202020;
 }
