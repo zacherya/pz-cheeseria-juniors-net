@@ -1,0 +1,17 @@
+
+<div mat-dialog-content>
+  <div class="row dialog-header">
+    <div class="d-flex col-sm-12">
+      <h1 mat-dialog-title>Are you sure you want to '<i>{{data.title}}</i>'?</h1>
+    </div>
+  </div>
+  <div class="row dialog-content">
+    <div class="col-sm-12">
+      <h6>This action may be irreversable or difficult to change once you proceed.</h6>
+    </div>
+  </div>
+</div>
+<div mat-dialog-actions class="dialog-footer mt-3">
+  <button cdkFocusInitial mat-raised-button color="warn" [attr.data-cy]="'confirm-action'" (click)="closeDialog(true)">Yes</button>
+  <button mat-raised-button [attr.data-cy]="'revoke-action'" (click)="closeDialog(false)">No</button>
+</div>

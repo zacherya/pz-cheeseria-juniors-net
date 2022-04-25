@@ -1,0 +1,62 @@
+
+<div mat-dialog-content>
+  <div class="row dialog-header">
+    <div class="d-flex col-sm-12">
+      <h1 mat-dialog-title>Recent purchase history</h1>
+      <button mat-icon-button mat-dialog-close aria-label="Close cheese dialog">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+  </div>
+  <div class="row dialog-content">
+    <div class="col-sm-12 p-2">
+      <div *ngIf="purchases.length === 0">
+        <p>No purchases have been made yet.</p>
+      </div>
+      <mat-accordion *ngIf="purchases.length > 0" class="example-headers-align">
+
+        <mat-expansion-panel *ngFor="let purchase of purchases" [expanded]="accordionStep === purchase.id" (opened)="setStep(purchase.id)">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Order #{{purchase.id}}
+              
+            </mat-panel-title>
+            <mat-panel-description>
+              {{convertPurchaseDate(purchase.purchasedOn)}}
+            </mat-panel-description>
+            <mat-panel-description>
+              {{getItemTotal(purchase.items)}} items
+            </mat-panel-description>
+            
+          </mat-expansion-panel-header>
+          
+          <table class="purchases-table">
+            <tr>
+              <th></th>
+              <th></th>
+              <th>Name</th>
+              <th>Category</th>
+              <th class="right-align">Price</th>
+              <th class="right-align">Cost</th>
+              </tr>
+            <tr *ngFor="let item of purchase.items">
+              <td>{{item.quantity}}x</td>
+              <td><img width="75" height="50" src="{{getProductFromId(item.cheeseId).image}}"/></td>
+              <td>{{getProductFromId(item.cheeseId).title}}</td>
+              
+              <td>{{getProductFromId(item.cheeseId).category}} </td>
+              <td class="right-align">${{getProductFromId(item.cheeseId).price.toFixed(2)}}</td>
+              <td class="right-align">${{(item.quantity*getProductFromId(item.cheeseId).price).toFixed(2)}}</td>
+            </tr>
+            <tr class="total-column">
+              <td colspan="6"><h5>${{getPurchaseTotal(purchase).toFixed(2)}}</h5></td>
+            </tr>
+            </table>
+            <div class="d-flex justify-content-end my-2 mb-1">
+              <button class="btn" [attr.data-cy]="'add-to-cart-' + purchase.id" (click)="addToCart(purchase.items)">Add order to cart</button>
+            </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+  </div>
+</div>

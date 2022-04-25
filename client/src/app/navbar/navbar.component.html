@@ -20,7 +20,7 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
+      <li *ngIf="purchasesLoaded && productsLoaded" class="nav-item" (click)="openRecentPurchases()">
         <a
           href="#"
           class="nav-link"
@@ -47,7 +47,7 @@
     <ul class="navbar-nav ml-auto icons">
       <li class="space"></li>
 
-      <li class="dropdown d-none d-lg-block">
+      <li class="dropdown d-none d-lg-block" >
         <a
           class="nav-link dropdown-toggle"
           href="#"
@@ -66,6 +66,7 @@
         </a>
 
         <div
+          id="navbarDropdown-menu"
           class="dropdown-menu"
           aria-labelledby="navbarDropdown"
           (click)="$event.stopPropagation()"
@@ -122,6 +123,7 @@
                       px-2
                       rounded-top
                     "
+                    [attr.data-cy]="'increment-item-' + purchaseItem.key"
                     (click)="changeItemAmount(purchaseItem.key, 1)"
                   >
                     +
@@ -135,6 +137,7 @@
                       px-2
                       rounded-bottom
                     "
+                    [attr.data-cy]="'decrement-item-' + purchaseItem.key"
                     (click)="changeItemAmount(purchaseItem.key, -1)"
                   >
                     -
@@ -165,7 +168,19 @@
           <div class="cart-summary" *ngIf="cartSize !== 0">
             <small>{{ cartSize !== 0 ? cartSize : 0 }} Selected item(s)</small>
             <h5>TOTAL : {{ calculateTotal() | currency: "USD" }}</h5>
+            <div class="cart-purchase" *ngIf="cartSize !== 0">
+              <button
+                class="btn btn-dark w-100 p-2 mt-2"
+                id="purchase-btn"
+                (click)="completePurchase()"
+                [attr.data-cy]="'purchase-cart-btn'"
+              >
+                <i class="fa fa-shopping-cart"></i>
+                Complete purchase
+              </button>
+            </div>
           </div>
+          
         </div>
       </li>
     </ul>

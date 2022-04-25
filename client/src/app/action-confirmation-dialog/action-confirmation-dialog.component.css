@@ -1,0 +1,42 @@
+/*
+    Default style overrides for cheese dialog
+*/
+.cdk-overlay-container {
+    z-index: 2000;
+}
+.mat-dialog-content .dialog-header > div {
+    justify-content: flex-start;
+}
+.mat-dialog-content .img-fluid {
+    border-radius: 10px 0 10px 0;
+    border: 4px #907f7f61 solid;
+}
+
+.mat-dialog-title {
+    font-weight: bolder;
+    font-size: 1.5rem;
+    margin-bottom: 0;
+}
+
+.mat-dialog-title > i {
+    color: #e74c3c;
+}
+
+.mat-dialog-subtitle {
+    font-weight: bold;
+    font-size: 1rem;
+    color: rgba(0,0,0,0.5);
+}
+
+.mat-dialog-actions {
+    justify-content: space-between;
+    margin: 0 6px;
+}
+
+.mat-dialog-actions .btn {
+    background: #cf0810;
+    color: white;
+    padding: 10px 20px;
+    border: #ccc 5px solid;
+    border-radius: 50px;
+}

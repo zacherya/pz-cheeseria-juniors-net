@@ -17,15 +17,15 @@
     </div>
     <div class="col-sm-6">
       <h1 mat-dialog-title>{{data.cheese.title}}</h1>
-      <p class="mat-dialog-subtitle">
+      <i>{{data.cheese.category}}</i>
+      <p class="mat-dialog-subtitle mt-1">
         <strong>${{data.cheese.price}}</strong>
       </p>
       <hr>
       <p>{{data.cheese.description}}</p>
-      
     </div>
   </div>
 </div>
 <div mat-dialog-actions class="dialog-footer">
-  <button cdkFocusInitial class="btn" [attr.data-cy]="'add-to-cart-' + data.cheese.id" (click)="addToCart(data.cheese.id)">Add To Cart</button>
+  <button cdkFocusInitial class="btn" [attr.data-cy]="'add-to-cart-' + data.cheese.id" (click)="addToCart(data.cheese.id)">Add to cart</button>
 </div>

@@ -1,21 +1,21 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CheeseDialogComponent } from './cheese-dialog.component';
+import { ActionConfirmationDialog } from './action-confirmation-dialog.component';
 
-describe('CheesesDialogComponent', () => {
-  let component: CheeseDialogComponent;
-  let fixture: ComponentFixture<CheeseDialogComponent>;
+describe('ActionConfirmationComponent', () => {
+  let component: ActionConfirmationDialog;
+  let fixture: ComponentFixture<ActionConfirmationDialog>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [CheeseDialogComponent],
+      declarations: [ActionConfirmationDialog],
       imports: [HttpClientTestingModule],
     }).compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CheeseDialogComponent);
+    fixture = TestBed.createComponent(ActionConfirmationDialog);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,16 +1,16 @@
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Hosting;
-using Pz.Cheeseria.Api.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Design;
+using System.Configuration;
 using Microsoft.Extensions.Configuration;
 using System.IO;
 
-namespace Pz.Cheeseria.Api
+namespace Pz.Cheeseria.Api.Data
 {
-    public class Program
+    public class PzCheeseriaContextFactory : IDesignTimeDbContextFactory<PzCheeseriaContext>
     {
-        public static string ConnectionString { get; private set; } = "Server=svfs01;Database=PzCheeseria;Trusted_Connection=True;";
-        public static void Main(string[] args)
+        public PzCheeseriaContext CreateDbContext(string[] args)
         {
+
             string path = Directory.GetCurrentDirectory();
 
             IConfigurationBuilder builder =
@@ -20,9 +20,8 @@ namespace Pz.Cheeseria.Api
 
             IConfigurationRoot config = builder.Build();
 
-            ConnectionString = config.GetConnectionString("PrimaryDbConnection");
+            string connString = config.GetConnectionString("PrimaryDbConnection");
 
-            // Run through arguments
             for (int i = 0; i < args.Length; i++)
             {
                 if ((args[i][0] == '/') || (args[i][0] == '-'))
@@ -30,7 +29,6 @@ namespace Pz.Cheeseria.Api
                     string arg = args[i].Substring(1);
                     string larg = arg.ToLower();
 
-                    // Db arg passed through, overwrite default connection string
                     if (larg.StartsWith("db="))
                     {
                         int idx = arg.IndexOf('=');
@@ -39,20 +37,14 @@ namespace Pz.Cheeseria.Api
                         string strDbConn = arg.Substring(idx + 1);
                         if (string.IsNullOrWhiteSpace(strDbConn)) break;
 
-                        ConnectionString = strDbConn;
+                        connString = strDbConn;
                     }
                 }
             }
+            var optionsBuilder = new DbContextOptionsBuilder<PzCheeseriaContext>();
+            optionsBuilder.UseSqlServer(connString);
 
-            //Start web api host
-            CreateHostBuilder(args).Build().Run();
+            return new PzCheeseriaContext(optionsBuilder.Options);
         }
-
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseStartup<Startup>();
-                });
     }
 }
