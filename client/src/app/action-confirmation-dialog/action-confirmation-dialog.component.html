@@ -12,6 +12,6 @@
   </div>
 </div>
 <div mat-dialog-actions class="dialog-footer mt-3">
-  <button cdkFocusInitial mat-raised-button color="warn" [attr.data-cy]="'complete-action'" (click)="closeDialog(true)">Yes</button>
+  <button cdkFocusInitial mat-raised-button color="warn" [attr.data-cy]="'confirm-action'" (click)="closeDialog(true)">Yes</button>
   <button mat-raised-button [attr.data-cy]="'revoke-action'" (click)="closeDialog(false)">No</button>
 </div>
