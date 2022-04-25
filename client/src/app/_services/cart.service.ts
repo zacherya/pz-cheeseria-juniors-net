@@ -4,6 +4,8 @@ import { CartModelPublic } from '../_models/cart';
 import { Cheese } from '../_models/cheese';
 import { BehaviorSubject } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
+import { PurchasesService } from './purchases.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
@@ -17,7 +19,9 @@ export class CartService {
   cartDataObs$ = new BehaviorSubject<CartModelPublic>(this.cartDataClient);
   productData$ = new BehaviorSubject<Cheese[]>([]);
 
-  constructor(private productsService: ProductsService, private toastr: ToastrService) {
+  constructor(private productsService: ProductsService, 
+    private purchasesServoce: PurchasesService, 
+    private toastr: ToastrService) {
     //fetch cheeses
     this.productsService.getCheeses().subscribe((prods) => {
       this.productData$.next(prods);
@@ -70,5 +74,23 @@ export class CartService {
 
     delete this.cartDataClient[id];
     this.cartDataObs$.next(this.cartDataClient);
+  }
+
+  PurchaseCart() {
+    const cart = this.cartDataClient;
+    const cartItems = Object.entries(cart).map(([id, quantity]) => {
+      return {
+        cheeseId: Number(id),
+        quantity: quantity,
+      };
+    });
+    this.purchasesServoce.completePurchase(cartItems).subscribe((purchase) => {
+      this.toastr.success(`Purchase of ${purchase.items.length} items completed!`);
+      this.cartDataClient = {};
+      this.cartDataObs$.next(this.cartDataClient);
+    },(err: HttpErrorResponse) => {
+      console.log(err.error.message);
+      this.toastr.error(`The purchase has failed, check your internet connection and try again.`);
+    });
   }
 }

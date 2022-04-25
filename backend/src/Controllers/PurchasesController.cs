@@ -49,7 +49,8 @@ namespace Pz.Cheeseria.Api.Controllers
 
         [HttpPost]
         [ProducesResponseType(typeof(Purchase), 200)]
-        public async Task<IActionResult> Index([Bind("data")] List<NewPurchase> purchases)
+        [Route("new")]
+        public async Task<IActionResult> New([Bind("data")] List<NewPurchase> purchases)
         {
             if (ModelState.IsValid)
             {

@@ -16,4 +16,10 @@ export class PurchasesService {
   getPurchases(): Observable<any> {
     return this.http.get(this.server_url + '/purchases');
   }
+
+  completePurchase(items: any): Observable<any> {
+    return this.http.post(this.server_url + '/purchases/new', {
+      data: items,
+    });
+  }
 }
