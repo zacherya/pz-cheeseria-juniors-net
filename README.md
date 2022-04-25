@@ -1,5 +1,27 @@
 # Welcome to Patient Zero's Cheeseria Coding Challenge (For Juniors)
 
+## Important Updated Notes
+
+The below instructions should be followed as per normal with the addition of setting up a database connection for the API backend solution.
+
+❗ The API solution must have all permissions that permit the creation/updating/deletion of databases, tables and rows
+
+#### To configure a database string in the backend solution:
+* Modify the PrimaryDbConnection string in the appsetting.json file
+* Or (preferred), add the command line argument `/db` to the solution profile
+  * <b>In VS2022:</b> command line argument is found in Project > Pz.Cheeseria.Api Properties > Debug > General > Open debug launch profiles UI > command line arugments
+  * <b>In VS2019:</b> command line argument is found in Project > Pz.Cheeseria.Api Properties > Debug > Application arguments
+
+#### Database argument example
+```batch
+:: MSSQL
+/db="Server=svfs01;Database=PzCheeseria;Trusted_Connection=True;"
+/db="Server=svfs01;Database=PzCheeseria;User Id=usrname;Password=pwd;"
+
+:: MySQL
+/db="Server=svfs01;Database=PzCheeseria;Uid=username;Pwd=pwd;"
+```
+
 ## Overview
 
 Help us complete our Cheese shopping cart.<br />
