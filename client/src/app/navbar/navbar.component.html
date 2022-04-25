@@ -66,11 +66,10 @@
         </a>
 
         <div
-        
+          id="navbarDropdown-menu"
           class="dropdown-menu"
           aria-labelledby="navbarDropdown"
-          [class.show]="cartDropdownOpen == true" (click)="toggleCartDropdown()"
-          
+          (click)="$event.stopPropagation()"
         >
           <h2 class="ml-5 mt-4">Your Shopping Cart</h2>
           <div
@@ -170,6 +169,7 @@
             <div class="cart-purchase" *ngIf="cartSize !== 0">
               <button
                 class="btn btn-dark w-100 p-2 mt-2"
+                id="purchase-btn"
                 (click)="completePurchase()"
                 [attr.data-cy]="'purchase-cart-btn'"
               >

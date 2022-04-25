@@ -26,7 +26,6 @@ export class NavbarComponent implements OnInit {
   logo: any;
 
   purchasesDialogOpen: boolean = false;
-  cartDropdownOpen: boolean = false;
 
   productsLoaded: boolean = false;
   purchasesLoaded: boolean = false;
@@ -74,7 +73,7 @@ export class NavbarComponent implements OnInit {
             if(success) {
               this.getPurchases((() => {
                 this.openRecentPurchases(purchaseId);
-                document.getElementById('navbarDropdown').classList.remove("show");
+                document.getElementById('navbarDropdown-menu').classList.remove("show");
               }).bind(this));
               
             }
@@ -133,9 +132,5 @@ export class NavbarComponent implements OnInit {
       (total, [key, value]) => total + this.getDetails(key).price * value,
       0
     );
-  }
-
-  toggleCartDropdown() {
-    this.cartDropdownOpen = !this.cartDropdownOpen;
   }
 }
