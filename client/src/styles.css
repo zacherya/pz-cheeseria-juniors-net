@@ -170,10 +170,21 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; padding-bot
     cursor: default;
 }
 
+.mat-dialog-container {
+  background: #eee;
+  }
 .mat-dialog-container .dialog-header {
   margin-bottom: 12px;
 }
 
 .mat-dialog-container .dialog-header > div {
   justify-content: flex-end;
+}
+
+.btn {
+  background: #cf0810;
+  color: white;
+  padding: 10px 20px;
+  border: #ccc 5px solid;
+  border-radius: 50px;
 }
