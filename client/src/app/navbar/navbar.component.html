@@ -123,6 +123,7 @@
                       px-2
                       rounded-top
                     "
+                    [attr.data-cy]="'increment-item-' + purchaseItem.key"
                     (click)="changeItemAmount(purchaseItem.key, 1)"
                   >
                     +
@@ -136,6 +137,7 @@
                       px-2
                       rounded-bottom
                     "
+                    [attr.data-cy]="'decrement-item-' + purchaseItem.key"
                     (click)="changeItemAmount(purchaseItem.key, -1)"
                   >
                     -

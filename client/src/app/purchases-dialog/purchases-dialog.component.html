@@ -25,7 +25,7 @@
               {{convertPurchaseDate(purchase.purchasedOn)}}
             </mat-panel-description>
             <mat-panel-description>
-              {{purchase.items.length}} items
+              {{getItemTotal(purchase.items)}} items
             </mat-panel-description>
             
           </mat-expansion-panel-header>

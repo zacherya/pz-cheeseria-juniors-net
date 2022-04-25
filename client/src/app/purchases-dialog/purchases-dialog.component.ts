@@ -55,6 +55,9 @@ import { ActionConfirmationDialog } from '../action-confirmation-dialog/action-c
       return this.products.find((product) => product.id === id);
     }
 
+    getItemTotal(items: PurchaseItem[]): number {
+      return items.reduce((total, item) => total + item.quantity, 0);
+    }
     getPurchaseTotal(purchase: Purchase): number {
       return purchase.items.reduce((total, item) => {
         return total + item.quantity * this.getProductFromId(item.cheeseId).price;
