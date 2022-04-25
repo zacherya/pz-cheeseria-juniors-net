@@ -27,6 +27,8 @@
 }
 .purchases-table > tr > td > img {
     border-radius: 6px;
+    border-radius: 10px 0 10px 0;
+    border: 4px #907f7f61 solid;
 }
 .purchases-table > tr > td {
     border-top: 1px solid rgba(0,0,0,0.1);
@@ -44,4 +46,12 @@
     font-weight: bolder;
     padding: 6px;
     padding-right:0 !important;
+}
+
+.btn {
+    background: #cf0810;
+    color: white;
+    padding: 10px 20px;
+    border: #ccc 5px solid;
+    border-radius: 50px;
 }

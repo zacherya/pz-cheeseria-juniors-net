@@ -49,9 +49,12 @@
               <td class="right-align">${{(item.quantity*getProductFromId(item.cheeseId).price).toFixed(2)}}</td>
             </tr>
             <tr class="total-column">
-              <td colspan="6">${{getPurchaseTotal(purchase).toFixed(2)}}</td>
+              <td colspan="6"><h5>${{getPurchaseTotal(purchase).toFixed(2)}}</h5></td>
             </tr>
             </table>
+            <div class="d-flex justify-content-end my-2 mb-1">
+              <button class="btn" [attr.data-cy]="'add-to-cart-' + purchase.id" (click)="addToCart(purchase.items)">Add order to cart</button>
+            </div>
         </mat-expansion-panel>
       </mat-accordion>
     </div>

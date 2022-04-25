@@ -25,9 +25,10 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { CheesesTabComponent } from './cheeses-tab/cheeses-tab.component';
 import { CheeseDialogComponent } from './cheese-dialog/cheese-dialog.component';
 import { PurchasesDialogComponent } from './purchases-dialog/purchases-dialog.component';
+import { ActionConfirmationDialog } from './action-confirmation-dialog/action-confirmation-dialog.component';
 
 @NgModule({
-  declarations: [AppComponent, NavbarComponent, CheesesTabComponent,CheeseDialogComponent, PurchasesDialogComponent],
+  declarations: [AppComponent, NavbarComponent, CheesesTabComponent,CheeseDialogComponent, PurchasesDialogComponent, ActionConfirmationDialog],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,

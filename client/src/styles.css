@@ -180,3 +180,11 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; padding-bot
 .mat-dialog-container .dialog-header > div {
   justify-content: flex-end;
 }
+
+.btn {
+  background: #cf0810;
+  color: white;
+  padding: 10px 20px;
+  border: #ccc 5px solid;
+  border-radius: 50px;
+}

@@ -6,6 +6,7 @@ import { Cheese } from '../_models/cheese';
 import { PurchasesDialogComponent } from '../purchases-dialog/purchases-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { Purchase } from '../_models/purchase';
+import { PurchaseItem } from '../_models/purchaseItem';
 
 @Component({
   selector: 'app-navbar',
@@ -62,9 +63,16 @@ export class NavbarComponent implements OnInit {
     });
     this.purchasesDialogOpen = true;
 
-    dialogRef.afterClosed().subscribe((result) => {
+    dialogRef.afterClosed().subscribe((data) => {
+      this.addRecentPurchasesToCart(data);
       console.log('The dialog was closed');
       this.purchasesDialogOpen = false;
+    });
+  }
+
+  addRecentPurchasesToCart(items: PurchaseItem[]) {
+    items.forEach((item) => {
+      this.cartService.AddPurchaseItemsToCart(item.cheeseId, item.quantity);
     });
   }
 

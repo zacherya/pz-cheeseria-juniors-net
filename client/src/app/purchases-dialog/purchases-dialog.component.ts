@@ -1,8 +1,10 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Cheese } from '../_models/cheese';
 import { Purchase } from '../_models/purchase';
 import { DatePipe } from '@angular/common';
+import { PurchaseItem } from '../_models/purchaseItem';
+import { ActionConfirmationDialog } from '../action-confirmation-dialog/action-confirmation-dialog.component';
 
 @Component({
     selector: 'purchase-modal-component',
@@ -19,6 +21,7 @@ import { DatePipe } from '@angular/common';
     constructor(
       public dialogRef: MatDialogRef<PurchasesDialogComponent>,
       private datePipe: DatePipe,
+      public actionDialog: MatDialog,
       @Inject(MAT_DIALOG_DATA) public data: any
     ) {}
   
@@ -30,9 +33,21 @@ import { DatePipe } from '@angular/common';
       this.products = this.data.products;
     }
   
-    //Custom close method for cleanup
+    //Custom close override method for cleanup
     closeDialog(): void {
       this.dialogRef.close();
+    }
+
+    addToCart(items: PurchaseItem[]) {
+      const confirmationRef = this.actionDialog.open(ActionConfirmationDialog, {
+        width: '720px',
+        data: {
+          title: 'Add previous purchase items to cart',
+          callback: (() => {
+            this.dialogRef.close(items)
+          }).bind(this)
+        },
+      });
     }
 
     getProductFromId(id: number): Cheese {
